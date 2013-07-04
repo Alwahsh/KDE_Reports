@@ -1,0 +1,24 @@
+<% if @project %>
+	<% content_for(:title, @project.title) %>
+<% else %>
+	<% content_for(:title, t('projects')) %>
+<% end %>
+<div class="page-header">
+	<% if @project %>
+		<%= render 'top_bar_for_single_project' %>
+	<% else %>
+		<% if can? :create, Project %>
+		  	<%= link_to new_project_path, :class => 'btn btn-primary' do %>
+		    	<i class="icon-plus icon-white"></i>
+		    	<%= t :new_project %>
+			<% end %>
+		<% end %>
+	  	<h1>
+	  		<%= t :listing_projects %>
+	 	</h1>
+ 	<% end %>
+</div>
+
+
+<%= render 'list_projects' %>
+

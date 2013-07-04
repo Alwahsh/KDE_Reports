@@ -1,0 +1,24 @@
+<table class="table table-striped">
+      <thead>
+	<tr>
+	  <th><%= t :id %></th>
+	  <th><%= t :component %></th>
+	  <th><%= t :assignee %></th>
+	  <th><%= t :status %></th>
+	  <th><%= t :summary %></th>
+	  <th><%= t :changed %></th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @bugs.each do |bug| %>
+	  <tr>
+	    <td><a href="https://bugs.kde.org/show_bug.cgi?id=<%= bug["id"] %>"><%= bug["id"] %></a></td>
+	    <td><%= bug["component"] %></td>
+	    <td><%= bug["assigned_to"] %></td>
+	    <td><%= bug["status"] %></td>
+	    <td><%= bug["summary"] %></td>
+	    <td><%= bug["last_change_time"][0..9] %></td>
+	  </tr>
+	<% end %>
+      </tbody>
+</table>

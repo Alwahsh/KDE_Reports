@@ -1,0 +1,75 @@
+<%= form_for(@project, :html => { :class => "form-horizontal" }) do |f| %>
+  <% if @project.errors.any? %>
+    <div class="alert alert-error">
+      <a class="close" data-dismiss="alert" href="#">×</a>
+      <h4 class="alert-heading"><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h4>
+
+      <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :parent_id, :class => "control-label" %>
+    <div class="controls">
+      <%= f.collection_select :parent_id,Project.all(:order => "title"), :id, :title, :include_blank => true %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :title, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_field :title, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :description, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :description, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :large_description, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :large_description, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bugzilla_products, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :bugzilla_products, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :git_repos, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :git_repos, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :mailing_lists, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :mailing_lists, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :irc_channels, :class => "control-label" %>
+    <div class="controls">
+      <%= f.text_area :irc_channels, :class => "input-xxlarge" %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :bugs_report_fields, :class => "control-label" %>
+    <% for bug_option in Project.bugs_options %>
+	    <div class="controls">
+	      <%= check_box_tag "project[bugs_report_fields][]", bug_option, @project.get_bug_report_fields.include?(bug_option) %>
+	      <%= bug_option %>
+	    </div>
+    <% end %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit :class => "btn btn-primary" %>
+  </div>
+<% end %>

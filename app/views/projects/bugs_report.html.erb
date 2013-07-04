@@ -1,0 +1,44 @@
+<% content_for(:title, t('bugs_report') + " " + t('for') + @project.title ) %>
+<div class="page-header">
+  <%= render 'top_bar_for_single_project' %>
+  <h1>
+	<%= t('bugs_report') + " " + t('for') + @project.title %>
+  </h1>
+</div>
+<div class="row">
+	<div class = "span9">
+		<div id="Number_of_bugs_over_the_last_year"></div>
+		
+		<% @data.each do |k,v| %>
+			<% unless (k == "reported_bugs_by_creation_time" || k == "resolved_bugs_by_creation_time") %>
+				<%= render :partial => "full_pie_chart_display", :locals => {
+					:title => k,
+					:data => v
+				} %>
+			<% end %>
+		<% end %>
+		<div id="total_bugs_by_assignee"></div> <%# This is used as a target for drawing bugs by assignee pie chart. %>
+
+	</div>
+	<div class = "span3">
+		<div class="well sidebar-nav">
+			<ul class="nav nav-list">
+				<%= render 'side_bar' %>
+			</ul>
+		</div>
+	</div>				
+</div>
+<% content_for :scripts do %>
+<%= javascript_include_tag 'highcharts.js' %>
+<script>
+	
+	<%= render :partial => "line_graph", :locals => {
+		:title => t('number_of_bugs_last_year'),
+		:y_label => t('number_of_bugs'),
+		:series => [{:name => t('reported_bugs'), :data => @data["reported_bugs_by_creation_time"]},
+			{:name => t('resolved_bugs'), :data => @data["resolved_bugs_by_creation_time"]}
+			]
+		}
+		 %>	
+</script>
+<% end %>

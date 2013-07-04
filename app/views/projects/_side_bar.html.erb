@@ -1,0 +1,5 @@
+<li><%= link_to @project.title + ' ' + t('home'), project_path %></li>
+<hr>
+<li class="list-header"><%= t('bugs').upcase %></li>
+<li><%= link_to t('bugs_report'), bugs_report_project_path %></li>
+<li><%= link_to t('bugs_list'), bugs_list_project_path %></li>

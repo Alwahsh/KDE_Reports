@@ -1,0 +1,17 @@
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th><%= t :title %></th>
+      <th><%= t :description %></th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @projects.each do |project| %>
+    <tr>
+      <td><%= link_to project.title, project %></td>
+      <td><%= project.description %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>

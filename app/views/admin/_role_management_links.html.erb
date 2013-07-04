@@ -1,0 +1,5 @@
+<% unless user.has_role?(role) %>
+	<a href="<%= root_url %>admin/control_user?id=<%= user.id %>&role=<%= role %>" class="btn"><%= t(role) %></a>
+<% else %>
+	<a href="<%= root_url %>admin/control_user?id=<%= user.id %>&role=<%= role %>&delete=true" class="btn btn-success"><%= t(role) %></a>
+<% end %>

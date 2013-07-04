@@ -1,0 +1,18 @@
+<% content_for(:title, @news.title ) %>
+<p>
+  <b>Title:</b>
+  <%= @news.title %>
+</p>
+
+<p style="white-space: pre-wrap"><b>Content:</b>
+<%= @news.content %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @news.user %>
+</p>
+
+
+<%= link_to 'Edit', edit_news_path(@news) %> |
+<%= link_to 'Back', news_index_path %>

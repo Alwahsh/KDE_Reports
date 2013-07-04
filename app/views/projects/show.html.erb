@@ -1,0 +1,22 @@
+<% content_for(:title, @project.title) %>
+<div class="page-header">
+  <%= render 'top_bar_for_single_project' %>
+  <h1>
+	<%= @project.title %>
+  </h1>
+</div>
+
+<div class="row">
+	<div class = "span9">
+		<%= @project.large_description %>
+	</div>
+	<div class = "span3">
+		<div class="well sidebar-nav">
+			<ul class="nav nav-list">
+				<%= render 'side_bar' %>
+			</ul>
+		</div>
+	</div>				
+</div>
+
+

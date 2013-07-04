@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%=h yield(:title) %> - KDE Reports</title>
+  <link href="http://cdn.kde.org/css/bootstrap.css" rel="stylesheet">
+  <link href="http://cdn.kde.org/css/bootstrap-responsive.css" rel="stylesheet">
+  <link href="http://cdn.kde.org/css/prettify.css" rel="stylesheet"/>
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  <script type="text/javascript" src="cdn.kde.org/nav/global-nav-links.en-us.js"></script>
+  <script type="text/javascript" src="cdn.kde.org/nav/global-nav-parser.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body data-spy="scroll">
+<div class="navbar navbar-static-top Neverland">
+			<div class="navbar-inner">
+				<div class="container">
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<i class="icon-th-list"></i>
+								<%= t('kde_links') %>
+								<b class="caret"></b>
+							</a>
+
+							<ul id="global-nav" class="dropdown-menu"></ul>
+						</li>
+					</ul>
+
+					<a href="/" class="brand">
+						<img src="//cdn.kde.org/img/logo.plain.small.png" alt="" />
+						<%= t('kde_reports') %>
+					</a>
+				</div>
+			</div>
+		</div>
+<div class="container">
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, :class => "alert #{name == :alert ? "alert-error" : "alert-success" }" do %>
+        <a class="close" data-dismiss="alert" href="#">×</a>
+        <%= msg %>
+      <% end %>
+    <% end %>
+      <%= yield %>
+      <span id="neverland-footer-placeholder"></span>
+            	<div id="footerRow" class="row">
+		<div class="navbar navbar-bottom Neverland">
+			<div class="navbar-inner">
+				<div class="container">
+					<ul id="footer-places" class="nav">
+						<li>
+							<a href="/"><i class="icon-home icon-white"></i>
+								<%= t :home %>
+							</a>
+						</li>
+						<li>
+							<a href="/projects"><i class="icon-book icon-white"></i>
+								<%= t :projects %>
+							</a>
+						</li>
+						<li>
+							<a href="/news"><i class="icon-file icon-white"></i>
+								<%= t :news %>
+							</a>
+						</li>
+					</ul>
+					<ul class="nav pull-right">
+						<% if user_signed_in? %>
+							<% if can? :index, :admin %>
+								<li>
+								  <%= link_to(t('admin_panel'), root_path+"admin") %>
+								</li>
+							<% end %>
+						  <li>
+						  <%= link_to(t('edit_profile'), edit_user_registration_path) %>
+						  </li>
+						  <li>
+						  <%= link_to(t('logout'), destroy_user_session_path, :method => :delete) %>        
+						  </li>
+						<% else %>
+						  <li>
+						  <%= link_to(t('sign_up'), new_user_registration_path)  %>
+						  </li>
+						  <li>
+						  <%= link_to(t('sign_in'), new_user_session_path)  %>  
+						  </li>
+						<% end %>
+					</ul>
+				</div>
+			</div>
+		</div>
+			      <footer class="Neverland" style="height:70px;">
+			      </footer>
+
+</div> <!-- /container -->
+<script src="http://cdn.kde.org/js/jquery.js"></script>
+<script src="http://cdn.kde.org/js/bootstrap.js"></script>
+<script src="http://cdn.kde.org/js/bootstrap-neverland.js"></script>
+<script src="http://cdn.kde.org/js/prettify.js"></script>
+<script src="http://cdn.kde.org/nav/global-nav.js"></script>
+<%= javascript_include_tag "jquery_ujs" %>
+<%=h yield(:scripts) %>
+</body>
+</html>

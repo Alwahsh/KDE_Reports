@@ -1,0 +1,11 @@
+<button class="btn" onclick="history.go(-1);return true;">
+    <i class="icon-list-alt"></i>
+    <%= t :back %>
+</button>
+
+<% if can? :update, @project %>
+	<%= link_to edit_project_path(@project), :class => 'btn btn-primary' do %>
+	    <i class="icon-pencil icon-white"></i>
+		<%= t :edit %>
+	<% end %>
+<% end %>

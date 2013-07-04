@@ -1,0 +1,11 @@
+<div id="<%= title %>"></div>
+<% content_for :scripts do %>
+	<script>
+		<%= render :partial => "pie_chart", :locals => {
+			:target => title,
+			:title => t(title),
+			:data => data
+			} 
+			 %>
+	</script>
+<% end %>

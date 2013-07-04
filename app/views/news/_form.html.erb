@@ -1,0 +1,26 @@
+<%= form_for(@news) do |f| %>
+  <% if @news.errors.any? %>
+    <div class="alert alert-error">
+      <h3 style="color:red;"><%= pluralize(@news.errors.count, "error") %> prohibited this news from being saved:</h3>
+
+      <ul>
+      <% @news.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %><br />
+    <%= f.text_field :title , :class => 'field span12' %>
+  </div>
+  <div class="control-group">
+    <%= f.label :content, :class => 'control-label' %><br />
+    <%= f.text_area :content , :class => 'field span12' %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")), news_index_path, :class => 'btn' %>
+  </div>
+<% end %>

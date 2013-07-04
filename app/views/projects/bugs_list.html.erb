@@ -1,0 +1,35 @@
+<% content_for(:title, t('bugs_list') + " " + t('for') + @project.title ) %>
+<div class="page-header">
+  <%= render 'top_bar_for_single_project' %>
+  <h1>
+	<%= t('bugs_list') + " " + t('for') + @project.title %>
+  </h1>
+</div>
+<div class="row">
+	<div class = "span9">
+		<%= render 'list_bugs' %>
+		<%= will_paginate @number_of_pages, :renderer => BootstrapPagination::Rails %>
+		<div class = "thumbnail">
+			<%= t :per_page %>
+			<%= form_tag({ :action => "bugs_list"}, { :method => "get", :id => "bugs-list" }) do %>
+	  			<%= select_tag(:view, options_for_select([["10",10],["15",15],["20",20],["30",30],["50",50],["100",100]],params[:view] ||= 10), { :id => "switch-view", :class => "input-mini" }) %>
+			<% end %>
+		</div>
+	</div>
+	<div class = "span3">
+		<div class="well sidebar-nav">
+			<ul class="nav nav-list">
+				<%= render 'side_bar' %>
+			</ul>
+		</div>
+	</div>				
+</div>
+<% content_for(:scripts) do%>
+<script>
+	$(document).ready(function() {
+	  $("#switch-view").change(function() {
+	    $("#bugs-list").submit();
+	  });
+	});
+</script>
+<% end %>

@@ -1,0 +1,20 @@
+$(function () {
+  new Highcharts.Chart({
+    chart: { renderTo: '<%= title.tr(" ", "_") %>' },
+    title: { text: '<%= title %>' },
+    xAxis: { type: 'datetime' },
+    yAxis: {
+      title: { text: '<%= y_label %>' }
+    },
+    series: [
+    <% series.each do |s| %>
+    {
+      name: "<%= s[:name] %>",	
+      pointInterval: <%= 31*24*60*60 * 1000 %>,
+      pointStart: <%= 12.months.ago.at_beginning_of_month.to_i * 1000 %>,
+      data: <%= s[:data] %>
+    },
+    <% end %>
+    ]
+  });
+});
